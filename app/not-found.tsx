@@ -1,6 +1,7 @@
 import { Footer } from "@/components/shared/footer";
 import { Navbar } from "@/components/shared/navbar";
 import { Button } from "@/components/ui/button";
+import { getMe } from "@/service/getMe";
 import { SearchX } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
   title: "Page not found",
 };
 
-const NotFound = () => {
+const NotFound = async () => {
+  const user = await getMe();
+
   return (
     <>
-      <Navbar />
+      <Navbar user={user} />
       <main className="flex flex-1 flex-col items-center justify-center gap-4 px-4 py-24 text-center">
         <span className="flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
           <SearchX className="size-8" />
@@ -34,7 +37,7 @@ const NotFound = () => {
           </Button>
         </div>
       </main>
-      <Footer />
+      <Footer user={user} />
     </>
   );
 };

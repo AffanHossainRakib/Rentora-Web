@@ -1,12 +1,19 @@
 import { Footer } from "@/components/shared/footer";
 import { Navbar } from "@/components/shared/navbar";
+import { getMe } from "@/service/getMe";
 
-const PublicGroupLayout = ({ children }: { children: React.ReactNode }) => {
+const PublicGroupLayout = async ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const user = await getMe();
+
   return (
     <>
-      <Navbar />
+      <Navbar user={user} />
       <main className="flex flex-1 flex-col">{children}</main>
-      <Footer />
+      <Footer user={user} />
     </>
   );
 };
