@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Refund Policy",
   description: "When and how rental payments made on Rentora can be refunded.",
+  alternates: { canonical: "/refund-policy" },
 };
 
 const RefundPolicyPage = () => {

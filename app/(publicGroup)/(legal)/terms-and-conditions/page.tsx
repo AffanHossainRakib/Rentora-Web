@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Terms & Conditions",
   description:
     "The rules for using Rentora to list, request and pay for rental properties in Bangladesh.",
+  alternates: { canonical: "/terms-and-conditions" },
 };
 
 const TermsAndConditionsPage = () => {

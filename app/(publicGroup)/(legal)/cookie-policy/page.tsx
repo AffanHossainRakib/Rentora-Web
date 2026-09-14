@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Cookie Policy",
   description:
     "The cookies and browser storage Rentora uses and how you can control them.",
+  alternates: { canonical: "/cookie-policy" },
 };
 
 const storageItems = [
