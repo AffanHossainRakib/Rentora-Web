@@ -9,7 +9,10 @@ import {
 import { jwtUtils } from "@/utils/jwt";
 import { cookies } from "next/headers";
 
-type ITokens = { accessToken: string; refreshToken: string };
+type ITokens = {
+  accessToken: string;
+  refreshToken: string;
+};
 
 const NETWORK_ERROR =
   "We couldn't reach the server. Check your connection and try again.";

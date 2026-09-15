@@ -107,7 +107,7 @@ const RegisterForm = ({
             id="name"
             name="name"
             autoComplete="name"
-            placeholder="Md. Affan Hossain Rakib"
+            placeholder="John Doe"
             defaultValue={values?.name}
             aria-invalid={!!errors.name}
           />
@@ -121,7 +121,7 @@ const RegisterForm = ({
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="john@example.com"
             defaultValue={values?.email}
             aria-invalid={!!errors.email}
           />

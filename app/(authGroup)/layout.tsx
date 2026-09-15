@@ -1,5 +1,6 @@
 import { Footer } from "@/components/shared/footer";
 import { Navbar } from "@/components/shared/navbar";
+import { DASHBOARD_ROUTES } from "@/lib/utils";
 import { getMe } from "@/service/getMe";
 import { redirect } from "next/navigation";
 
@@ -7,7 +8,7 @@ const AuthGroupLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getMe();
 
   if (user) {
-    redirect("/");
+    redirect(DASHBOARD_ROUTES[user.role]);
   }
 
   return (
