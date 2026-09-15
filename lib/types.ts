@@ -1,4 +1,12 @@
+import { LucideIcon } from "lucide-react";
+
 export type IRole = "TENANT" | "LANDLORD" | "ADMIN";
+
+export type ISidebarItem = {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+};
 
 export type IErrorDetail = { path: string; message: string };
 
@@ -37,6 +45,72 @@ export type IUser = {
   createdAt: string;
   updatedAt: string;
   profile: IProfile | null;
+};
+
+export type IProperty = {
+  id: string;
+  userId: string;
+  title: string;
+  description?: string | null;
+  isAvailable: boolean;
+  location: string;
+  price: number;
+  amenities: string[];
+  pictures: string[];
+  category: string;
+  createdAt: string;
+  updatedAt: string;
+  landlord?: IUser;
+  reviews?: IReview[];
+};
+
+export type IReview = {
+  id: string;
+  userId: string;
+  propertyId: string;
+  rentalRequestId: string;
+  rating: number;
+  review: string;
+  createdAt: string;
+  updatedAt: string;
+  user?: { id: string; name: string };
+};
+
+export type IRentalStatus =
+  | "PENDING"
+  | "APPROVED"
+  | "REJECTED"
+  | "ACTIVE"
+  | "COMPLETED";
+
+export type IRentalRequest = {
+  id: string;
+  userId: string;
+  propertyId: string;
+  status: IRentalStatus;
+  startDate: string;
+  endDate: string;
+  createdAt: string;
+  updatedAt: string;
+  property?: IProperty;
+  tenant?: IUser;
+};
+
+export type IPaymentStatus = "PENDING" | "COMPLETED" | "FAILED";
+
+export type IPayment = {
+  id: string;
+  rentalRequestId: string;
+  status: IPaymentStatus;
+  transactionId: string | null;
+  amount: number;
+  method: string;
+  provider: "STRIPE" | "SSLCOMMERZ";
+  paidAt: string | null;
+  currency: string;
+  createdAt: string;
+  updatedAt: string;
+  rentalRequest?: IRentalRequest;
 };
 
 // Returned by form Server Actions and read with useActionState
