@@ -10,8 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 const AMENITY_OPTIONS = [
   "WiFi",
@@ -27,6 +28,7 @@ const AMENITY_OPTIONS = [
 export function PropertyFilters({ categories }: { categories: string[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
 
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get("searchTerm") ?? "",
@@ -49,7 +51,9 @@ export function PropertyFilters({ categories }: { categories: string[] }) {
     });
 
     params.delete("page");
-    router.push(`/properties?${params.toString()}`);
+    startTransition(() => {
+      router.push(`/properties?${params.toString()}`);
+    });
   };
 
   const toggleAmenity = (amenity: string) => {
@@ -74,14 +78,20 @@ export function PropertyFilters({ categories }: { categories: string[] }) {
     setLocation("");
     setPriceMin("");
     setPriceMax("");
-    router.push("/properties");
+    startTransition(() => {
+      router.push("/properties");
+    });
   };
 
   return (
-    <div className="space-y-4 rounded-xl border p-4">
+    <div
+      className="space-y-4 rounded-xl border p-4"
+      aria-busy={isPending}
+    >
       <form
         onSubmit={handleSubmit}
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        inert={isPending || undefined}
       >
         <div className="space-y-1.5">
           <Label htmlFor="searchTerm">Search</Label>
@@ -167,14 +177,22 @@ export function PropertyFilters({ categories }: { categories: string[] }) {
         </div>
 
         <div className="flex items-end gap-2 sm:col-span-2 lg:col-span-2">
-          <Button type="submit">Apply filters</Button>
-          <Button type="button" variant="outline" onClick={clearAll}>
+          <Button type="submit" disabled={isPending}>
+            {isPending && <Loader2 className="animate-spin" />}
+            Apply filters
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={clearAll}
+            disabled={isPending}
+          >
             Clear
           </Button>
         </div>
       </form>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2" aria-busy={isPending} inert={isPending || undefined}>
         {AMENITY_OPTIONS.map((amenity) => (
           <Button
             key={amenity}

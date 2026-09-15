@@ -8,12 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Loader2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 export function UserFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isPending, startTransition] = useTransition();
   const [searchTerm, setSearchTerm] = useState(
     searchParams.get("searchTerm") ?? "",
   );
@@ -23,7 +25,9 @@ export function UserFilters() {
     const params = new URLSearchParams();
     if (nextSearchTerm) params.set("searchTerm", nextSearchTerm);
     if (nextRole !== "all") params.set("role", nextRole);
-    router.push(`/admin-dashboard/users?${params.toString()}`);
+    startTransition(() => {
+      router.push(`/admin-dashboard/users?${params.toString()}`);
+    });
   };
 
   const handleRoleChange = (value: string) => {
@@ -36,7 +40,7 @@ export function UserFilters() {
   };
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap items-center gap-3" aria-busy={isPending}>
       <Input
         placeholder="Search by name or email"
         value={searchTerm}
@@ -45,9 +49,10 @@ export function UserFilters() {
           if (event.key === "Enter") handleSearchCommit();
         }}
         onBlur={handleSearchCommit}
+        disabled={isPending}
         className="max-w-xs"
       />
-      <Select value={role} onValueChange={handleRoleChange}>
+      <Select value={role} onValueChange={handleRoleChange} disabled={isPending}>
         <SelectTrigger className="w-40">
           <SelectValue />
         </SelectTrigger>
@@ -58,6 +63,9 @@ export function UserFilters() {
           <SelectItem value="ADMIN">Admin</SelectItem>
         </SelectContent>
       </Select>
+      {isPending && (
+        <Loader2 className="size-4 animate-spin text-muted-foreground" />
+      )}
     </div>
   );
 }
