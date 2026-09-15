@@ -20,17 +20,30 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useActionFeedback } from "@/hooks/use-action-feedback";
 import { cn } from "@/lib/utils";
-import { Loader2, Star } from "lucide-react";
+import { CheckCircle2, Loader2, Star } from "lucide-react";
 import { useActionState, useState } from "react";
 import { submitReview } from "../../_actions/reviewActions";
 
 export function ReviewDialog({ rentalRequestId }: { rentalRequestId: string }) {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
+  const [reviewed, setReviewed] = useState(false);
   const [state, action, pending] = useActionState(submitReview, null);
   const errors = state?.errors ?? {};
 
-  useActionFeedback(state, () => setOpen(false));
+  useActionFeedback(state, () => {
+    setOpen(false);
+    setReviewed(true);
+  });
+
+  if (reviewed) {
+    return (
+      <Button size="sm" variant="outline" disabled className="gap-1.5">
+        <CheckCircle2 className="size-4" />
+        Reviewed
+      </Button>
+    );
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
