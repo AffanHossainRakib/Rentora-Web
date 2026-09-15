@@ -94,6 +94,7 @@ export type IRentalRequest = {
   updatedAt: string;
   property?: IProperty;
   tenant?: IUser;
+  review?: IReview | null;
 };
 
 export type IPaymentStatus = "PENDING" | "COMPLETED" | "FAILED";

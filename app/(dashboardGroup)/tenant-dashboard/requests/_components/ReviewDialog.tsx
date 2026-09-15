@@ -24,10 +24,16 @@ import { CheckCircle2, Loader2, Star } from "lucide-react";
 import { useActionState, useState } from "react";
 import { submitReview } from "../../_actions/reviewActions";
 
-export function ReviewDialog({ rentalRequestId }: { rentalRequestId: string }) {
+export function ReviewDialog({
+  rentalRequestId,
+  alreadyReviewed = false,
+}: {
+  rentalRequestId: string;
+  alreadyReviewed?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
-  const [reviewed, setReviewed] = useState(false);
+  const [reviewed, setReviewed] = useState(alreadyReviewed);
   const [state, action, pending] = useActionState(submitReview, null);
   const errors = state?.errors ?? {};
 

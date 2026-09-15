@@ -62,7 +62,10 @@ export function RequestCard({ request }: { request: IRentalRequest }) {
             </Button>
           )}
           {request.status === "COMPLETED" && (
-            <ReviewDialog rentalRequestId={request.id} />
+            <ReviewDialog
+              rentalRequestId={request.id}
+              alreadyReviewed={!!request.review}
+            />
           )}
         </div>
       </div>
