@@ -4,10 +4,7 @@ import { formatCurrency, SITE_URL } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  getCitySummaries,
-  getProperties,
-} from "../../_actions/propertyActions";
+import { getCitySummaries, getProperties } from "../../_actions/propertyActions";
 import { Breadcrumbs } from "../../_components/Breadcrumbs";
 import { PropertyCard } from "../../_components/PropertyCard";
 
@@ -22,10 +19,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city } = await params;
   const summary = await loadCitySummary(city);
 
-  if (!summary) return {};
+  if (!summary) notFound();
 
   return {
-    title: `Basha Vara in ${summary.name}`,
+    title: `বাসা ভাড়া in ${summary.name}`,
     description: `Find ${summary.count} flats, houses, studios and hostels for rent in ${summary.name}, Bangladesh, listed directly by landlords on Rentora.`,
     alternates: { canonical: `/basha-vara/${city}` },
   };
@@ -45,7 +42,7 @@ export default async function CityPage({ params }: Props) {
   const prices = properties.map((property) => property.price);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
-  const pageTitle = `Basha Vara in ${summary.name}`;
+  const pageTitle = `বাসা ভাড়া in ${summary.name}`;
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",

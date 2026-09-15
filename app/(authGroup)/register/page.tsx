@@ -5,7 +5,7 @@ import RegisterForm from "../_components/RegisterForm";
 export const metadata: Metadata = {
   title: "Create an account",
   description:
-    "Join Rentora as a tenant to find basha vara, or as a landlord to list your property in Bangladesh.",
+    "Join Rentora as a tenant to find বাসা ভাড়া, or as a landlord to list your property in Bangladesh.",
   robots: { index: false, follow: true },
 };
 

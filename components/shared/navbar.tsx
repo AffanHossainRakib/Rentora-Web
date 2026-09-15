@@ -32,6 +32,9 @@ import { ThemeToggle } from "./theme-toggle";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Reviews", href: "/#reviews" },
+  { label: "FAQs", href: "/#faqs" },
   { label: "About", href: "/about" },
 ];
 
@@ -74,7 +77,7 @@ export function Navbar({ user }: { user?: IUser | null }) {
         <Logo />
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
@@ -102,7 +105,7 @@ export function Navbar({ user }: { user?: IUser | null }) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="hidden rounded-full md:inline-flex"
+                  className="hidden rounded-full lg:inline-flex"
                   aria-label="Open account menu"
                 >
                   <UserAvatar user={user} className="size-8" />
@@ -133,7 +136,7 @@ export function Navbar({ user }: { user?: IUser | null }) {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="hidden items-center gap-2 md:flex">
+            <div className="hidden items-center gap-2 lg:flex">
               <Button variant="ghost" asChild>
                 <Link href="/login">Login</Link>
               </Button>
@@ -149,7 +152,7 @@ export function Navbar({ user }: { user?: IUser | null }) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
+                className="lg:hidden"
                 aria-label="Open menu"
               >
                 <Menu className="size-5" />

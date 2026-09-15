@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const property = await loadProperty(slug);
 
-  if (!property) return {};
+  if (!property) notFound();
 
   const ogImage = property.pictures.find(isValidImageUrl);
 

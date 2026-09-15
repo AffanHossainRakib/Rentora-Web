@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Rentora – find basha vara across Bangladesh";
+export const alt = "Rentora – find বাসা ভাড়া across Bangladesh";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -38,7 +38,7 @@ export default function OpengraphImage() {
         </span>
       </div>
       <div style={{ marginTop: 36, fontSize: 48, opacity: 0.95 }}>
-        Find basha vara across Bangladesh
+        Find বাসা ভাড়া across Bangladesh
       </div>
       <div style={{ marginTop: 16, fontSize: 32, opacity: 0.8 }}>
         Flats, houses, studios &amp; hostels for rent – listed by landlords

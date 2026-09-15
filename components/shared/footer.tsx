@@ -40,7 +40,7 @@ export function Footer({ user }: { user?: IUser | null }) {
         <div className="space-y-3 sm:col-span-3 lg:col-span-2">
           <Logo />
           <p className="max-w-sm text-sm text-muted-foreground">
-            Rentora helps you find basha vara across Bangladesh — flats, houses,
+            Rentora helps you find বাসা ভাড়া across Bangladesh — flats, houses,
             studios and hostels listed directly by landlords.
           </p>
         </div>

@@ -49,7 +49,7 @@ export default function AboutPage() {
           A rental marketplace built for Bangladesh
         </h1>
         <p className="text-lg text-muted-foreground">
-          Rentora connects tenants looking for basha vara with landlords listing
+          Rentora connects tenants looking for বাসা ভাড়া with landlords listing
           flats, houses, studios and hostels across Bangladesh. No brokers, no
           guesswork — just verified listings and a secure way to pay.
         </p>

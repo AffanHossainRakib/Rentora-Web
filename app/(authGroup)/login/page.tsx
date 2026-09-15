@@ -19,7 +19,7 @@ const LoginPage = async ({ searchParams }: PageProps<"/login">) => {
           Welcome back
         </h1>
         <p className="text-sm text-muted-foreground">
-          Log in to continue finding or managing your basha vara.
+          Log in to continue finding or managing your বাসা ভাড়া.
         </p>
       </div>
 

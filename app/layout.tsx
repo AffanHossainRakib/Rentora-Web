@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      "Rentora – Rental Platform in Bangladesh for Basha Vara, Flats & Houses",
+      "Rentora – Rental Platform in Bangladesh for বাসা ভাড়া, Flats & Houses",
     template: "%s | Rentora",
   },
   description:
-    "Find basha vara across Bangladesh on Rentora. Browse flats, houses, studios and hostels for rent in Dhaka, Chittagong and beyond, listed directly by landlords, and pay securely online.",
+    "Find বাসা ভাড়া across Bangladesh on Rentora. Browse flats, houses, studios and hostels for rent in Dhaka, Chittagong and beyond, listed directly by landlords, and pay securely online.",
   applicationName: "Rentora",
   openGraph: {
     type: "website",

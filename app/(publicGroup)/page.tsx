@@ -3,8 +3,13 @@ import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/utils";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getProperties } from "./_actions/propertyActions";
+import { getCitySummaries, getProperties } from "./_actions/propertyActions";
+import { CtaSection } from "./_components/CtaSection";
+import { FaqSection } from "./_components/FaqSection";
+import { HowItWorksSection } from "./_components/HowItWorksSection";
+import { PopularCitiesSection } from "./_components/PopularCitiesSection";
 import { PropertyCard } from "./_components/PropertyCard";
+import { TestimonialsSection } from "./_components/TestimonialsSection";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -28,8 +33,13 @@ const websiteJsonLd = {
 };
 
 export default async function Home() {
-  const result = await getProperties({ limit: "6", isAvailable: "true" });
-  const properties = result.success ? result.data.properties : [];
+  const [propertiesResult, cities] = await Promise.all([
+    getProperties({ limit: "6", isAvailable: "true" }),
+    getCitySummaries(),
+  ]);
+  const properties = propertiesResult.success
+    ? propertiesResult.data.properties
+    : [];
 
   return (
     <>
@@ -38,7 +48,7 @@ export default async function Home() {
 
       <section className="flex flex-col items-center justify-center gap-6 px-4 py-20 text-center">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Find Basha Vara Anywhere in Bangladesh
+          Find বাসা ভাড়া Anywhere in Bangladesh
         </h1>
         <p className="max-w-xl text-muted-foreground">
           Browse flats, houses, studios and hostels listed directly by landlords
@@ -69,6 +79,12 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+      <HowItWorksSection />
+      {cities.length > 0 && <PopularCitiesSection cities={cities} />}
+      <TestimonialsSection />
+      <FaqSection />
+      <CtaSection />
     </>
   );
 }
