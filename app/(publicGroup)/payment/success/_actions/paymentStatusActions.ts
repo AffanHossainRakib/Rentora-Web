@@ -9,11 +9,11 @@ export const getRentalStatus = async (
 ): Promise<IRentalStatus | null> => {
   const accessToken = (await cookies()).get("accessToken")?.value;
 
-  const result = await backendGet<IRentalRequest>(
+  const result = await backendGet<{ rentalRequest: IRentalRequest }>(
     `/rentals/${id}`,
     { cache: "no-store" },
     accessToken,
   );
 
-  return result.success ? result.data.status : null;
+  return result.success ? result.data.rentalRequest.status : null;
 };

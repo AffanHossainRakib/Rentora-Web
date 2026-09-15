@@ -1,5 +1,5 @@
 import { backendGet } from "@/lib/api";
-import { IPayment, IRentalRequest } from "@/lib/types";
+import { IApiResponse, IPayment, IRentalRequest } from "@/lib/types";
 import { cookies } from "next/headers";
 
 export type IRentalQuery = { status?: string; page?: string; limit?: string };
@@ -19,13 +19,20 @@ export const getMyRentalRequests = async (query: IRentalQuery = {}) => {
   );
 };
 
-export const getRentalRequestById = async (id: string) => {
+export const getRentalRequestById = async (
+  id: string,
+): Promise<IApiResponse<IRentalRequest>> => {
   const accessToken = (await cookies()).get("accessToken")?.value;
-  return backendGet<IRentalRequest>(
+
+  const result = await backendGet<{ rentalRequest: IRentalRequest }>(
     `/rentals/${id}`,
     { cache: "no-store" },
     accessToken,
   );
+
+  return result.success
+    ? { ...result, data: result.data.rentalRequest }
+    : (result as unknown as IApiResponse<IRentalRequest>);
 };
 
 export type IPaymentQuery = { status?: string; page?: string; limit?: string };
